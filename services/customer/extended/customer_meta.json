@@ -1,0 +1,6 @@
+{
+  "module": "customer_kyc",
+  "status": "verified",
+  "risk_rating": "LOW",
+  "tier": "PREMIUM"
+}
