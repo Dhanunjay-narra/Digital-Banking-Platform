@@ -1,0 +1,5 @@
+{
+  "module": "finx_platform",
+  "status": "production_ready",
+  "rbac_roles_count": 13
+}
