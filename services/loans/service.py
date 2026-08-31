@@ -5,9 +5,9 @@ from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from typing import List, Dict, Any
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException, InsufficientFundsException
-from platform.common.math_utils import calculate_emi, to_decimal
-from platform.observability.metrics import metrics
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException, InsufficientFundsException
+from finx_platform.common.math_utils import calculate_emi, to_decimal
+from finx_platform.observability.metrics import metrics
 from services.loans.models import LoanApplication, LoanRepayment, LoanStatus, LoanType
 from services.loans.schemas import LoanApplyRequest, LoanUnderwriteDecisionRequest, LoanRepayRequest
 from services.accounts.models import BankAccount

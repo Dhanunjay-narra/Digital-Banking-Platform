@@ -2,8 +2,8 @@
 
 from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Text, Float
 from sqlalchemy.orm import relationship
-from platform.common.database import Base
-from platform.common.base_model import generate_uuid, TimestampMixin
+from finx_platform.common.database import Base
+from finx_platform.common.base_model import generate_uuid, TimestampMixin
 
 
 class KYCApplication(Base, TimestampMixin):

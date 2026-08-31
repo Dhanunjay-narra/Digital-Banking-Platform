@@ -2,7 +2,7 @@
 
 from typing import Optional, Dict, Any, List
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException
 from services.customer.models import Customer, CustomerAddress, CustomerBeneficiary, CustomerNominee
 from services.customer.schemas import CustomerCreate, AddressCreate, BeneficiaryCreate, NomineeCreate, Customer360Response, CustomerResponse
 from services.identity.models import User

@@ -4,7 +4,7 @@ import random
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, InsufficientFundsException, EntityNotFoundException
+from finx_platform.common.exceptions import FinTechException, InsufficientFundsException, EntityNotFoundException
 from services.wallet.models import DigitalWallet, WalletTransaction
 from services.wallet.schemas import WalletTopupRequest, WalletWithdrawRequest, WalletTransferRequest
 from services.accounts.models import BankAccount

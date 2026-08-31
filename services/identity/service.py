@@ -3,10 +3,10 @@
 from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 from sqlalchemy.orm import Session
-from platform.security.password import hash_password, verify_password
-from platform.security.jwt_handler import create_access_token, create_refresh_token, decode_token
-from platform.security.mfa import mfa_service
-from platform.common.exceptions import FinTechException, EntityNotFoundException
+from finx_platform.security.password import hash_password, verify_password
+from finx_platform.security.jwt_handler import create_access_token, create_refresh_token, decode_token
+from finx_platform.security.mfa import mfa_service
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException
 from services.identity.models import User, UserSession, UserDevice
 from services.identity.schemas import UserRegisterRequest, UserLoginRequest, TokenResponse
 

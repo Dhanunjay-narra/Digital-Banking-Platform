@@ -5,17 +5,17 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any, List
 from sqlalchemy.orm import Session
-from platform.common.exceptions import (
+from finx_platform.common.exceptions import (
     FinTechException,
     InsufficientFundsException,
     AccountFrozenException,
     IdempotencyConflictException,
     EntityNotFoundException
 )
-from platform.common.lock import lock_manager
-from platform.common.idempotency import idempotency_store
-from platform.observability.metrics import metrics
-from platform.observability.logger import get_logger
+from finx_platform.common.lock import lock_manager
+from finx_platform.common.idempotency import idempotency_store
+from finx_platform.observability.metrics import metrics
+from finx_platform.observability.logger import get_logger
 from services.transactions.models import FinancialTransaction, TransactionStatus, TransactionType
 from services.transactions.schemas import TransactionInitiateRequest
 from services.accounts.models import BankAccount

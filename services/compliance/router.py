@@ -3,7 +3,7 @@
 from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.compliance.schemas import SanctionsCheckRequest, SanctionMatchResponse, SARCreateRequest
 from services.compliance.service import compliance_service
 from services.compliance.models import SARReport

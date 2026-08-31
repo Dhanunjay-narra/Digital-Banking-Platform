@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 from typing import Dict, Any
 from sqlalchemy.orm import Session
-from platform.common.exceptions import EntityNotFoundException
+from finx_platform.common.exceptions import EntityNotFoundException
 from services.credit.models import CreditProfile
 from services.credit.schemas import CreditScoreResponse, ScoreSimulationRequest
 

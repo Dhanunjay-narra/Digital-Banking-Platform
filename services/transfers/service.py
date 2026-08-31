@@ -4,7 +4,7 @@ import random
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, InsufficientFundsException
+from finx_platform.common.exceptions import FinTechException, InsufficientFundsException
 from services.transfers.models import BankTransfer, TransferRail
 from services.transfers.schemas import TransferInitiateRequest
 from services.transactions.service import transaction_engine

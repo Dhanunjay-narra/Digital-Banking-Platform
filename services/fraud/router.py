@@ -3,7 +3,7 @@
 from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.fraud.schemas import FraudEvaluationRequest, FraudEvaluationResponse, FraudAlertResponse
 from services.fraud.service import fraud_engine
 from services.fraud.models import FraudAlert

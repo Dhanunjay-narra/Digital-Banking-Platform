@@ -1,7 +1,7 @@
 """Investment & Wealth Management Business Logic."""
 
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, InsufficientFundsException
+from finx_platform.common.exceptions import FinTechException, InsufficientFundsException
 from services.investments.models import PortfolioHolding, SIPPlan, AssetClass
 from services.investments.schemas import InvestmentOrderRequest, SIPCreateRequest, PortfolioSummaryResponse, HoldingResponse
 from services.accounts.models import BankAccount

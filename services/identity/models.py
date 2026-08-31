@@ -2,8 +2,8 @@
 
 from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
-from platform.common.database import Base
-from platform.common.base_model import generate_uuid, TimestampMixin, get_utc_now
+from finx_platform.common.database import Base
+from finx_platform.common.base_model import generate_uuid, TimestampMixin, get_utc_now
 
 
 class User(Base, TimestampMixin):

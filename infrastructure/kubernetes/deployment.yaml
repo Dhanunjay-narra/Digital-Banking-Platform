@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finxcore-banking-deployment
+  labels:
+    app: finxcore
+    tier: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: finxcore
+  template:
+    metadata:
+      labels:
+        app: finxcore
+    spec:
+      containers:
+        - name: finxcore-api
+          image: finxcore/digital-banking:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+            - name: PORT
+              value: "8000"
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "2048Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finxcore-banking-service
+spec:
+  type: ClusterIP
+  selector:
+    app: finxcore
+  ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP

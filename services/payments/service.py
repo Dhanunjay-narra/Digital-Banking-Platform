@@ -4,7 +4,7 @@ import json
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException
 from services.payments.models import PaymentOrder, PaymentRefund, PaymentStatus
 from services.payments.schemas import PaymentOrderCreate, PaymentCaptureRequest, PaymentRefundRequest
 from services.ledger.service import ledger_service

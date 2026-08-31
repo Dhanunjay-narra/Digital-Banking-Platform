@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Any
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, InsufficientFundsException
+from finx_platform.common.exceptions import FinTechException, InsufficientFundsException
 from services.insurance.models import InsurancePolicy, InsuranceClaim, PolicyType
 from services.insurance.schemas import InsuranceQuoteRequest, PolicyBuyRequest, ClaimCreateRequest
 from services.accounts.models import BankAccount

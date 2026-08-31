@@ -3,9 +3,9 @@
 from typing import List
 from fastapi import APIRouter, Depends, Header, Request
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
-from platform.security.jwt_handler import decode_token
-from platform.common.exceptions import FinTechException
+from finx_platform.common.database import get_db
+from finx_platform.security.jwt_handler import decode_token
+from finx_platform.common.exceptions import FinTechException
 from services.identity.schemas import (
     UserRegisterRequest,
     UserLoginRequest,

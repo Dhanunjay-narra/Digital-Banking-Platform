@@ -5,7 +5,7 @@ import random
 from datetime import datetime, timezone
 from typing import List, Dict, Any
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException
 from services.merchants.models import MerchantProfile, MerchantSettlement
 from services.merchants.schemas import MerchantCreateRequest
 from services.ledger.service import ledger_service

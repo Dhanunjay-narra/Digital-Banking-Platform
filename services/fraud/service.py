@@ -4,8 +4,8 @@ import json
 from datetime import datetime, timezone
 from typing import List, Dict, Any
 from sqlalchemy.orm import Session
-from platform.observability.metrics import metrics
-from platform.observability.logger import get_logger
+from finx_platform.observability.metrics import metrics
+from finx_platform.observability.logger import get_logger
 from services.fraud.models import FraudAlert, RiskDecision
 from services.fraud.schemas import FraudEvaluationRequest, FraudEvaluationResponse
 
