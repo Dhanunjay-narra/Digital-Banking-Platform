@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.tox/
+.nox/
+
+# Database & Logs
+*.sqlite
+*.sqlite3
+*.db
+*.log
+logs/
+
+# Node & Frontend
+node_modules/
+dist/
+build/
+.next/
+out/
+.parcel-cache/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Output Zips
+*.zip
+!Digital Banking Platform.zip

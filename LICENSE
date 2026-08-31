@@ -1,0 +1,32 @@
+FinXCore™ Commercial Proprietary Software License
+Copyright (c) 2026 Dhanunjay Narra / FinXCore Technologies Inc.
+All Rights Reserved.
+
+CONFIDENTIAL & PROPRIETARY
+
+This software, including its source code, architecture, algorithms, database schemas,
+interfaces, and documentation (the "Software"), is the proprietary intellectual property
+of Dhanunjay Narra / FinXCore Technologies Inc.
+
+1. GRANT OF LICENSE
+Subject to the terms and conditions herein, the owner grants an exclusive, perpetual,
+royalty-free right to use, inspect, test, benchmark, compile, execute, deploy, and evaluate
+the Software.
+
+2. RESTRICTIONS
+Except as expressly permitted by written authorization from the copyright holder:
+(a) You may not distribute, sub-license, rent, lease, or resell the Software as a standalone closed-source package to third parties.
+(b) You may not remove or alter any copyright, trademark, or other proprietary notices contained in the Software.
+
+3. DISCLAIMER OF WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+4. REGULATORY COMPLIANCE NOTICE
+Operating real-world financial, banking, payment, credit, investment, or insurance services
+requires compliance with jurisdiction-specific regulatory authorities (such as RBI, SEBI, IRDAI,
+FINCEN, FCA, etc.) and authorized licensed banking partners. This software provides complete
+financial architecture, core engines, simulators, and production-grade software workflows.
