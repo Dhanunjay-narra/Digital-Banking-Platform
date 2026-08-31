@@ -3,9 +3,9 @@
 import random
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException
-from platform.security.password import hash_password, verify_password
-from platform.security.crypto import encrypt_data, decrypt_data, mask_card_number
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException
+from finx_platform.security.password import hash_password, verify_password
+from finx_platform.security.crypto import encrypt_data, decrypt_data, mask_card_number
 from services.cards.models import PaymentCard, CardType
 from services.cards.schemas import CardIssueRequest, CardPINSetRequest, CardControlsUpdateRequest, CardRevealResponse
 

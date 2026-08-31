@@ -1,7 +1,7 @@
 """Centralized Multi-Channel Notification Service."""
 
 from sqlalchemy.orm import Session
-from platform.observability.logger import get_logger
+from finx_platform.observability.logger import get_logger
 from services.notifications.models import NotificationLog
 from services.notifications.schemas import NotificationSendRequest
 

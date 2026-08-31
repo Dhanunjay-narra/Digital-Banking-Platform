@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinXCore — Intelligent Digital Banking & Financial Super Platform</title>
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 900: '#1e1b4b' },
+            gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); }
+    .card-gradient { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); }
+    .gold-gradient { background: linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%); }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- TOP 1-CLICK QUICK PERSONA SWITCHER BAR -->
+  <div class="bg-slate-950 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-50 text-xs">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center font-black text-white text-sm shadow-md">F</div>
+      <span class="font-extrabold text-sm text-white tracking-wide">FinX<span class="text-indigo-400">Core</span></span>
+      <span class="bg-indigo-950 text-indigo-300 border border-indigo-700/50 px-2 py-0.5 rounded-full text-[10px] font-bold">SUPER PLATFORM</span>
+    </div>
+
+    <!-- 1-Click Role Quick Buttons -->
+    <div class="flex items-center gap-1.5 flex-wrap">
+      <span class="text-slate-400 font-semibold mr-1 hidden sm:inline"><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>1-Click Logins:</span>
+      <button onclick="switchRole('customer')" id="btn-role-customer" class="px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition flex items-center gap-1.5 shadow-sm">
+        <i class="fa-solid fa-user"></i> Customer (Dhanunjay)
+      </button>
+      <button onclick="switchRole('merchant')" id="btn-role-merchant" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-store"></i> Merchant (NexGen)
+      </button>
+      <button onclick="switchRole('admin')" id="btn-role-admin" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-shield-halved"></i> Super Admin
+      </button>
+      <button onclick="switchRole('loan_officer')" id="btn-role-loan" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-file-invoice-dollar"></i> Loan Officer
+      </button>
+      <button onclick="switchRole('compliance')" id="btn-role-compliance" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-scale-balanced"></i> Compliance
+      </button>
+      <button onclick="switchRole('risk')" id="btn-role-risk" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 hover:text-white transition flex items-center gap-1.5">
+        <i class="fa-solid fa-triangle-exclamation"></i> Risk Analyst
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span id="activeUserBadge" class="bg-emerald-950 text-emerald-300 border border-emerald-700 px-2.5 py-1 rounded-full font-bold">
+        <i class="fa-solid fa-circle text-[8px] text-emerald-400 mr-1 animate-pulse"></i> Logged in: Dhanunjay Narra
+      </span>
+      <a href="/docs" target="_blank" class="px-2.5 py-1 bg-slate-800 text-slate-300 hover:text-white rounded-lg border border-slate-700 font-semibold">
+        <i class="fa-solid fa-code mr-1"></i> API Docs
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- PORTAL 1: CUSTOMER BANKING PORTAL -->
+    <div id="portal-customer" class="space-y-6">
+
+      <!-- Hero Greeting & Key Balances -->
+      <div class="grid md:grid-cols-4 gap-4">
+        <!-- Balance Card -->
+        <div class="bg-gradient-to-br from-slate-800 to-indigo-950/80 p-5 rounded-2xl border border-indigo-900/50 shadow-lg">
+          <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-2">
+            <span>SAVINGS ACCOUNT</span>
+            <span class="text-indigo-400 font-mono">100019283746</span>
+          </div>
+          <div class="text-3xl font-extrabold text-white" id="custSavingsBal">₹2,48,500.00</div>
+          <div class="flex items-center gap-2 mt-3 text-xs">
+            <span class="px-2 py-0.5 bg-emerald-900/60 text-emerald-300 rounded font-bold">+4.0% p.a.</span>
+            <span class="text-slate-400">Available Balance</span>
+          </div>
+        </div>
+
+        <!-- Wallet Balance Card -->
+        <div class="bg-gradient-to-br from-slate-800 to-violet-950/80 p-5 rounded-2xl border border-violet-900/50 shadow-lg">
+          <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-2">
+            <span>DIGITAL WALLET</span>
+            <span class="text-violet-400 font-mono">WAL9876543210</span>
+          </div>
+          <div class="text-3xl font-extrabold text-white" id="custWalletBal">₹18,500.00</div>
+          <div class="flex items-center gap-2 mt-3 text-xs">
+            <span class="px-2 py-0.5 bg-indigo-900/60 text-indigo-300 rounded font-bold">Instant Rails</span>
+            <span class="text-slate-400">Daily Limit: ₹50,000</span>
+          </div>
+        </div>
+
+        <!-- UPI Handle Card -->
+        <div class="bg-gradient-to-br from-slate-800 to-teal-950/80 p-5 rounded-2xl border border-teal-900/50 shadow-lg">
+          <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-2">
+            <span>UPI VPA RAIL</span>
+            <span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> ACTIVE</span>
+          </div>
+          <div class="text-xl font-bold text-white mono truncate">dhanunjay@finx</div>
+          <div class="flex items-center gap-2 mt-4 text-xs">
+            <button onclick="showUpiQrModal()" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold flex items-center gap-1">
+              <i class="fa-solid fa-qrcode"></i> Show My QR
+            </button>
+            <span class="text-slate-400">NPCI Simulator</span>
+          </div>
+        </div>
+
+        <!-- Credit Health Card -->
+        <div class="bg-gradient-to-br from-slate-800 to-amber-950/80 p-5 rounded-2xl border border-amber-900/50 shadow-lg">
+          <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-2">
+            <span>CREDIT SCORE</span>
+            <span class="text-amber-400 font-bold">EXCELLENT</span>
+          </div>
+          <div class="text-3xl font-extrabold text-amber-400">782 <span class="text-xs text-slate-400 font-normal">/ 900</span></div>
+          <div class="flex items-center gap-2 mt-3 text-xs">
+            <span class="px-2 py-0.5 bg-amber-900/60 text-amber-300 rounded font-bold">Pre-Approved</span>
+            <span class="text-slate-400">₹5,00,000 Limit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Operations & Interactive Simulator -->
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- Column 1: Financial Movement Actions -->
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-4">
+          <h3 class="font-extrabold text-sm text-indigo-400 flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Quick Money Movement
+          </h3>
+
+          <!-- Transfer Form -->
+          <div class="space-y-3 bg-slate-900/80 p-4 rounded-xl border border-slate-700/50 text-xs">
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Payment Method / Rail</label>
+              <select id="transferRail" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-semibold">
+                <option value="UPI">UPI Instant Payment (@finx)</option>
+                <option value="IMPS">IMPS 24x7 Real-Time</option>
+                <option value="NEFT">NEFT Direct Settlement</option>
+                <option value="INTERNAL">Internal FinX Transfer</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Beneficiary Account / VPA</label>
+              <input type="text" id="transferDest" value="nexgen.pay@finx" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono" placeholder="user@finx or Account Number">
+            </div>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Amount (₹)</label>
+              <input type="number" id="transferAmount" value="1500" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold text-sm" placeholder="1000">
+            </div>
+            <button onclick="executeTransferAction()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition shadow-md flex items-center justify-center gap-2">
+              <i class="fa-solid fa-shield-halved"></i> Authorize & Send Instantly
+            </button>
+            <div id="transferAlert" class="hidden p-2 rounded text-[11px] font-semibold"></div>
+          </div>
+
+          <!-- Wallet Top-Up / Withdraw Quick Buttons -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <button onclick="executeWalletAction('topup')" class="p-3 bg-slate-900 hover:bg-slate-700/60 border border-slate-700 rounded-xl font-bold text-left">
+              <i class="fa-solid fa-circle-plus text-emerald-400 mr-1"></i> Top-Up Wallet
+              <div class="text-[10px] text-slate-400 mt-1 font-normal">+₹2,000 from Bank</div>
+            </button>
+            <button onclick="executeWalletAction('withdraw')" class="p-3 bg-slate-900 hover:bg-slate-700/60 border border-slate-700 rounded-xl font-bold text-left">
+              <i class="fa-solid fa-arrow-right-from-bracket text-amber-400 mr-1"></i> Withdraw Wallet
+              <div class="text-[10px] text-slate-400 mt-1 font-normal">Transfer to Bank</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Column 2: RuPay Virtual Card with Live Reveal & Controls -->
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-sm text-indigo-400 flex items-center gap-2">
+              <i class="fa-solid fa-credit-card"></i> Virtual Platinum Card
+            </h3>
+            <span class="px-2 py-0.5 bg-emerald-950 text-emerald-300 text-[10px] font-bold rounded-full border border-emerald-800">ACTIVE</span>
+          </div>
+
+          <!-- Interactive Card Visual -->
+          <div class="card-gradient rounded-2xl p-5 shadow-2xl relative overflow-hidden border border-indigo-500/30 text-white space-y-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="text-[10px] tracking-widest text-indigo-200 uppercase font-bold">FinX Platinum Debit</div>
+                <div class="text-xs font-semibold text-indigo-300">Contactless Chip Enabled</div>
+              </div>
+              <div class="text-xl font-black italic tracking-tighter text-amber-400">RuPay</div>
+            </div>
+
+            <div class="my-3">
+              <div class="text-xs text-indigo-200 mb-1">Card Number</div>
+              <div id="cardNumDisplay" class="font-mono text-base tracking-widest font-bold">6521 •••• •••• 4489</div>
+            </div>
+
+            <div class="flex justify-between items-end text-xs">
+              <div>
+                <div class="text-[9px] text-indigo-300 uppercase">Card Holder</div>
+                <div class="font-bold tracking-wide">DHANUNJAY NARRA</div>
+              </div>
+              <div>
+                <div class="text-[9px] text-indigo-300 uppercase">Expires / CVV</div>
+                <div class="font-mono font-bold" id="cardExpDisplay">12/31 • <span id="cardCvvDisplay" class="text-amber-400">•••</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Actions & Controls -->
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <button onclick="toggleCardReveal()" id="btnRevealCard" class="py-2 px-3 bg-slate-900 hover:bg-slate-700 border border-slate-700 rounded-xl font-bold text-center">
+              <i class="fa-solid fa-eye text-indigo-400 mr-1"></i> Reveal Details
+            </button>
+            <button onclick="toggleCardBlock()" id="btnBlockCard" class="py-2 px-3 bg-slate-900 hover:bg-slate-700 border border-slate-700 rounded-xl font-bold text-center">
+              <i class="fa-solid fa-lock text-amber-400 mr-1"></i> Freeze Card
+            </button>
+          </div>
+
+          <!-- Channel Toggles -->
+          <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/40 text-xs space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-300">Online Transactions</span>
+              <input type="checkbox" checked class="accent-indigo-600 rounded">
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-300">Contactless (NFC Tap & Pay)</span>
+              <input type="checkbox" checked class="accent-indigo-600 rounded">
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-300">International Usage</span>
+              <input type="checkbox" class="accent-indigo-600 rounded">
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: AI Insights & Recommendations -->
+        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-4">
+          <h3 class="font-extrabold text-sm text-indigo-400 flex items-center gap-2">
+            <i class="fa-solid fa-brain"></i> AI Financial Intelligence
+          </h3>
+
+          <div class="space-y-3">
+            <div class="p-3 bg-indigo-950/40 border border-indigo-800/50 rounded-xl text-xs space-y-1">
+              <div class="flex items-center gap-1.5 font-bold text-indigo-300">
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> High Liquidity Detected
+              </div>
+              <p class="text-slate-300 text-[11px] leading-relaxed">
+                ₹1,00,000 from standard savings can be moved into FinX 7.5% High-Yield FD for an extra ₹7,500/year.
+              </p>
+            </div>
+
+            <div class="p-3 bg-emerald-950/40 border border-emerald-800/50 rounded-xl text-xs space-y-1">
+              <div class="flex items-center gap-1.5 font-bold text-emerald-300">
+                <i class="fa-solid fa-chart-line text-emerald-400"></i> SIP Compounding Potential
+              </div>
+              <p class="text-slate-300 text-[11px] leading-relaxed">
+                A ₹5,000 monthly SIP in FinX Bluechip Fund is projected to grow to ₹42.5 Lakhs in 15 years.
+              </p>
+            </div>
+
+            <div class="p-3 bg-slate-900/60 border border-slate-700/40 rounded-xl text-xs space-y-2">
+              <div class="flex justify-between font-bold text-slate-300">
+                <span>Financial Health Score</span>
+                <span class="text-emerald-400 font-mono">88 / 100</span>
+              </div>
+              <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Services: Loans, Investments, Insurance, Expenses Tabs -->
+      <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-700 pb-3">
+          <div class="flex gap-2">
+            <button onclick="switchServiceTab('loans')" id="tab-loans" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold text-xs">Loans & EMI</button>
+            <button onclick="switchServiceTab('invest')" id="tab-invest" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 font-bold text-xs hover:text-white">Investments & SIP</button>
+            <button onclick="switchServiceTab('insure')" id="tab-insure" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 font-bold text-xs hover:text-white">Insurance</button>
+            <button onclick="switchServiceTab('bills')" id="tab-bills" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 font-bold text-xs hover:text-white">Bills & Utilities</button>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">FinTech Services Suite</span>
+        </div>
+
+        <!-- Tab Panel: Loans -->
+        <div id="panel-loans" class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-3 text-xs">
+            <h4 class="font-bold text-white text-sm">Instant Loan Application</h4>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Loan Product</label>
+              <select id="loanProductType" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-semibold">
+                <option value="PERSONAL">Instant Personal Loan (11.5% p.a.)</option>
+                <option value="HOME">Home Loan (8.5% p.a.)</option>
+                <option value="AUTO">Vehicle Loan (9.2% p.a.)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Amount: ₹<span id="loanAmtDisplay" class="font-bold text-white">200000</span></label>
+              <input type="range" id="loanAmountSlider" min="20000" max="1000000" step="10000" value="200000" oninput="updateEmiCalc()" class="w-full accent-indigo-600">
+            </div>
+            <div>
+              <label class="block text-slate-400 font-semibold mb-1">Tenure: <span id="loanTenureDisplay" class="font-bold text-white">24</span> Months</label>
+              <input type="range" id="loanTenureSlider" min="6" max="60" step="6" value="24" oninput="updateEmiCalc()" class="w-full accent-indigo-600">
+            </div>
+            <button onclick="applyLoanAction()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg shadow transition">
+              <i class="fa-solid fa-check mr-1"></i> Apply & Disburse Instantly
+            </button>
+          </div>
+
+          <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700/50 flex flex-col justify-center text-center space-y-3">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Calculated Monthly EMI</div>
+            <div class="text-4xl font-extrabold text-emerald-400" id="calculatedEmi">₹9,368<span class="text-sm text-slate-400 font-normal">/mo</span></div>
+            <div class="text-xs text-slate-400">Total Interest: <span id="calcTotalInterest" class="text-white font-bold">₹24,832</span> • Total Repayable: <span id="calcTotalRepay" class="text-white font-bold">₹2,24,832</span></div>
+            <div class="text-[11px] text-indigo-300 bg-indigo-950/60 p-2 rounded border border-indigo-800/40">Automated double-entry disbursement straight to your Savings Account</div>
+          </div>
+        </div>
+
+        <!-- Tab Panel: Investments -->
+        <div id="panel-invest" class="hidden grid md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <div class="font-bold text-white text-sm">FinX Bluechip Fund</div>
+            <div class="text-emerald-400 font-bold text-base">+16.4% 1Y Return</div>
+            <p class="text-slate-400 text-[11px]">Nifty 50 Top Leaders. Zero exit load after 1 year.</p>
+            <button onclick="buyAssetAction('FINX-NIFTY50', 'FinX Bluechip Fund')" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg mt-2">Invest ₹5,000</button>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <div class="font-bold text-white text-sm">Global Tech Leaders ETF</div>
+            <div class="text-emerald-400 font-bold text-base">+22.8% 1Y Return</div>
+            <p class="text-slate-400 text-[11px]">Top AI and Cloud computing enterprise holdings.</p>
+            <button onclick="buyAssetAction('FINX-TECH-ETF', 'Global Tech ETF')" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg mt-2">Invest ₹10,000</button>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <div class="font-bold text-white text-sm">Digital 24K Gold Vault</div>
+            <div class="text-amber-400 font-bold text-base">₹7,100 / Gram</div>
+            <p class="text-slate-400 text-[11px]">99.9% pure insured physical gold stored in bank vaults.</p>
+            <button onclick="buyAssetAction('GOLD-999', 'Digital 24K Gold')" class="w-full py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg mt-2">Buy 1 Gram</button>
+          </div>
+        </div>
+
+        <!-- Tab Panel: Insurance -->
+        <div id="panel-insure" class="hidden grid md:grid-cols-2 gap-4 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+            <div class="flex justify-between">
+              <span class="font-bold text-white text-sm">Health Shield 360</span>
+              <span class="text-emerald-400 font-bold">₹10 Lakh Cover</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Cashless hospitalizations across 12,500+ network hospitals with zero co-pay.</p>
+            <div class="text-lg font-bold text-white">₹14,500 <span class="text-xs text-slate-400 font-normal">/ year</span></div>
+            <button onclick="buyPolicyAction('HEALTH', 'Health Shield 360', 1000000, 14500)" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg">Buy Policy</button>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-3">
+            <div class="flex justify-between">
+              <span class="font-bold text-white text-sm">Term Life Pure Protector</span>
+              <span class="text-indigo-400 font-bold">₹1 Crore Cover</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Comprehensive family financial security with instant claim settlement.</p>
+            <div class="text-lg font-bold text-white">₹8,900 <span class="text-xs text-slate-400 font-normal">/ year</span></div>
+            <button onclick="buyPolicyAction('TERM_LIFE', 'Term Life Pure Protector', 10000000, 8900)" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg">Buy Policy</button>
+          </div>
+        </div>
+
+        <!-- Tab Panel: Bills -->
+        <div id="panel-bills" class="hidden space-y-3 text-xs">
+          <div class="grid md:grid-cols-3 gap-3">
+            <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+              <div>
+                <div class="font-bold text-white">Bescom Electricity</div>
+                <div class="text-[10px] text-slate-400">Due in 12 days • ₹2,450.00</div>
+              </div>
+              <button onclick="payBillMock('Bescom Electricity', 2450)" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded">Pay</button>
+            </div>
+            <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+              <div>
+                <div class="font-bold text-white">Airtel Fiber Broadband</div>
+                <div class="text-[10px] text-slate-400">Due in 5 days • ₹1,179.00</div>
+              </div>
+              <button onclick="payBillMock('Airtel Broadband', 1179)" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded">Pay</button>
+            </div>
+            <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 flex justify-between items-center">
+              <div>
+                <div class="font-bold text-white">Tata Play DTH</div>
+                <div class="text-[10px] text-slate-400">Due in 18 days • ₹499.00</div>
+              </div>
+              <button onclick="payBillMock('Tata Play', 499)" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded">Pay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PORTAL 2: MERCHANT CHECKOUT & SETTLEMENT PORTAL -->
+    <div id="portal-merchant" class="hidden space-y-6">
+      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-white">NexGen Retail — Merchant Portal</h2>
+            <p class="text-xs text-slate-400 mt-1">Payment Gateway Terminal, Dynamic QR, and Instant Settlement Console</p>
+          </div>
+          <div class="bg-slate-900 px-4 py-2 rounded-xl border border-slate-700 text-xs font-mono text-indigo-300">
+            API Key: key_live_finx_98472910482
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 pt-2">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">TODAY'S GMV</div>
+            <div class="text-2xl font-extrabold text-white mt-1">₹1,48,920.00</div>
+            <div class="text-[11px] text-emerald-400 mt-1 font-bold">142 Transactions Processed</div>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">UNSETTLED BALANCE</div>
+            <div class="text-2xl font-extrabold text-amber-400 mt-1">₹62,400.00</div>
+            <button onclick="triggerMerchantSettlementAction()" class="mt-2 text-xs px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded">
+              <i class="fa-solid fa-arrow-right-arrow-left mr-1"></i> Settle to Bank (T+0)
+            </button>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">MERCHANT MDR FEE</div>
+            <div class="text-2xl font-extrabold text-indigo-400 mt-1">1.8%</div>
+            <div class="text-[11px] text-slate-400 mt-1">Unified pricing across UPI, Cards & NetBanking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Gateway Interactive Terminal Simulator -->
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3 text-xs">
+          <h3 class="font-extrabold text-sm text-indigo-400"><i class="fa-solid fa-cart-shopping mr-2"></i> Payment Gateway Checkout Tester</h3>
+          <div>
+            <label class="block text-slate-400 font-semibold mb-1">Customer Email</label>
+            <input type="text" id="gwCustEmail" value="customer@finxcore.com" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 font-semibold mb-1">Order Amount (₹)</label>
+            <input type="number" id="gwOrderAmount" value="2400" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold">
+          </div>
+          <div>
+            <label class="block text-slate-400 font-semibold mb-1">Payment Method</label>
+            <select id="gwMethod" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-semibold">
+              <option value="UPI">UPI Instant Rails (@finx)</option>
+              <option value="CARD">Tokenized RuPay / Visa Card</option>
+              <option value="WALLET">FinX Digital Wallet</option>
+            </select>
+          </div>
+          <button onclick="createAndCaptureGatewayOrder()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg shadow">
+            Simulate Customer Checkout & Double-Entry Capture
+          </button>
+          <div id="gwResultBox" class="hidden p-3 bg-slate-950 border border-indigo-900 rounded-xl font-mono text-[11px] text-emerald-300"></div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3 text-xs flex flex-col items-center text-center justify-center">
+          <h3 class="font-extrabold text-sm text-indigo-400"><i class="fa-solid fa-qrcode mr-1"></i> In-Store Merchant Static & Dynamic QR</h3>
+          <div class="bg-white p-4 rounded-2xl shadow-xl">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=nexgen.pay@finx%26pn=NexGenRetail%26cu=INR" alt="Merchant QR" class="w-40 h-40">
+          </div>
+          <div class="font-mono text-slate-300 font-bold">nexgen.pay@finx</div>
+          <p class="text-[11px] text-slate-400 max-w-xs">Scan using any UPI app or the FinX Customer Simulator for instant 0-second settlement.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- PORTAL 3: ADMIN & FINTECH OPERATIONS BACK-OFFICE -->
+    <div id="portal-admin" class="hidden space-y-6">
+      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 space-y-4">
+        <h2 class="text-2xl font-extrabold text-white flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-indigo-400"></i> FinXCore Back-Office & Operations Console
+        </h2>
+
+        <!-- Real-Time Metrics -->
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">TOTAL TRANSACTION VOLUME</div>
+            <div class="text-2xl font-extrabold text-white mt-1">₹1.84 Cr</div>
+            <div class="text-[11px] text-emerald-400 mt-1 font-bold">99.98% Success Rate</div>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">LEDGER INTEGRITY</div>
+            <div class="text-2xl font-extrabold text-emerald-400 mt-1">BALANCED</div>
+            <div class="text-[11px] text-slate-400 mt-1">Debits == Credits (100% Invariant)</div>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">ACTIVE CUSTOMERS</div>
+            <div class="text-2xl font-extrabold text-indigo-400 mt-1">1,250</div>
+            <div class="text-[11px] text-slate-400 mt-1">Tier-1 Retail & Wealth</div>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <div class="text-xs text-slate-400 font-semibold">RECONCILIATION BREAKS</div>
+            <div class="text-2xl font-extrabold text-teal-400 mt-1">0 Breaks</div>
+            <div class="text-[11px] text-slate-400 mt-1">4-Way Multi-Rail Matched</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tools: Ledger Explorer, Fraud Alerts, Reconciliation -->
+      <div class="grid lg:grid-cols-2 gap-6">
+
+        <!-- Tool 1: Authoritative Double-Entry Ledger Explorer -->
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3 text-xs">
+          <div class="flex justify-between items-center">
+            <h3 class="font-extrabold text-sm text-indigo-400"><i class="fa-solid fa-book-journal-whills mr-1"></i> Chart of Accounts & Balances</h3>
+            <button onclick="fetchTrialBalance()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded">Refresh Ledger</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="text-slate-400 border-b border-slate-700 font-bold">
+                  <th class="pb-2">Code</th>
+                  <th class="pb-2">Account Name</th>
+                  <th class="pb-2">Type</th>
+                  <th class="pb-2 text-right">Balance (₹)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-700/40 text-[11px] font-mono" id="ledgerTbody">
+                <tr><td class="py-2 text-indigo-400">1000</td><td>Central Bank Liquidity Reserve</td><td class="text-emerald-400">ASSET</td><td class="text-right">10,00,00,000.00</td></tr>
+                <tr><td class="py-2 text-indigo-400">1010</td><td>Settlement Clearing Receivable</td><td class="text-emerald-400">ASSET</td><td class="text-right">1,48,500.00</td></tr>
+                <tr><td class="py-2 text-indigo-400">1030</td><td>Loans Receivable (Active)</td><td class="text-emerald-400">ASSET</td><td class="text-right">4,50,000.00</td></tr>
+                <tr><td class="py-2 text-indigo-400">2000</td><td>Customer Savings Deposits</td><td class="text-amber-400">LIABILITY</td><td class="text-right">2,48,500.00</td></tr>
+                <tr><td class="py-2 text-indigo-400">2020</td><td>Customer Wallet Balances</td><td class="text-amber-400">LIABILITY</td><td class="text-right">18,500.00</td></tr>
+                <tr><td class="py-2 text-indigo-400">4000</td><td>Payment Gateway Fee Income</td><td class="text-indigo-400">REVENUE</td><td class="text-right">24,800.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tool 2: Fraud & Sanctions Live Workbench -->
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3 text-xs">
+          <div class="flex justify-between items-center">
+            <h3 class="font-extrabold text-sm text-indigo-400"><i class="fa-solid fa-shield-virus mr-1"></i> Real-Time Fraud & AML Monitor</h3>
+            <button onclick="runSanctionsScreenMock()" class="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded">Run Sanctions Test</button>
+          </div>
+
+          <div class="space-y-2">
+            <div class="p-3 bg-red-950/40 border border-red-800/60 rounded-xl space-y-1">
+              <div class="flex justify-between items-center font-bold text-red-300">
+                <span>TXN-HIGH-VELOCITY-ANOMALY</span>
+                <span class="px-2 py-0.5 bg-red-900 text-white rounded text-[10px]">RISK: 85/100 (BLOCKED)</span>
+              </div>
+              <p class="text-slate-300 text-[11px]">Rapid outbound transfer attempt to suspicious mule account pattern. Rule matched: RULE_LARGE_AMOUNT_THRESHOLD_EXCEEDED.</p>
+            </div>
+
+            <div class="p-3 bg-slate-900 border border-slate-700 rounded-xl space-y-1">
+              <div class="flex justify-between items-center font-bold text-emerald-300">
+                <span>Automated 4-Way Reconciliation Engine</span>
+                <span class="px-2 py-0.5 bg-emerald-900 text-white rounded text-[10px]">BALANCED</span>
+              </div>
+              <p class="text-slate-400 text-[11px]">Core Banking vs Switch vs Gateway vs General Ledger: 100% matched, zero breaks detected.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QR CODE MODAL -->
+  <div id="qrModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center text-slate-400">
+        <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">FinX UPI Dynamic QR</span>
+        <button onclick="closeUpiQrModal()" class="hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="bg-white p-4 rounded-2xl mx-auto inline-block">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=dhanunjay@finx%26pn=DhanunjayNarra%26cu=INR" alt="UPI QR" class="w-44 h-44">
+      </div>
+      <div class="font-mono text-white font-bold text-sm">dhanunjay@finx</div>
+      <p class="text-xs text-slate-400">Scan to transfer funds directly to Savings Account 100019283746</p>
+      <button onclick="closeUpiQrModal()" class="w-full py-2 bg-indigo-600 text-white font-bold rounded-xl">Done</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC FOR ROLE SWITCHING, LIVE ACTIONS & SIMULATORS -->
+  <script>
+    const API_BASE = '/api/v1';
+    let currentRole = 'customer';
+    let cardRevealed = false;
+
+    function switchRole(role) {
+      currentRole = role;
+      document.querySelectorAll('[id^="btn-role-"]').forEach(b => {
+        b.className = "px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-bold hover:bg-slate-700 hover:text-white transition flex items-center gap-1.5";
+      });
+
+      const btn = document.getElementById(`btn-role-${role.replace('_', '')}`);
+      if (btn) btn.className = "px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition flex items-center gap-1.5 shadow-sm";
+
+      const badge = document.getElementById('activeUserBadge');
+
+      if (role === 'customer') {
+        badge.innerHTML = '<i class="fa-solid fa-circle text-[8px] text-emerald-400 mr-1 animate-pulse"></i> Logged in: Dhanunjay Narra (Customer)';
+        document.getElementById('portal-customer').classList.remove('hidden');
+        document.getElementById('portal-merchant').classList.add('hidden');
+        document.getElementById('portal-admin').classList.add('hidden');
+      } else if (role === 'merchant') {
+        badge.innerHTML = '<i class="fa-solid fa-circle text-[8px] text-amber-400 mr-1 animate-pulse"></i> Logged in: NexGen Retail (Merchant Admin)';
+        document.getElementById('portal-customer').classList.add('hidden');
+        document.getElementById('portal-merchant').classList.remove('hidden');
+        document.getElementById('portal-admin').classList.add('hidden');
+      } else {
+        badge.innerHTML = `<i class="fa-solid fa-circle text-[8px] text-indigo-400 mr-1 animate-pulse"></i> Logged in: ${role.toUpperCase()} Back-Office`;
+        document.getElementById('portal-customer').classList.add('hidden');
+        document.getElementById('portal-merchant').classList.add('hidden');
+        document.getElementById('portal-admin').classList.remove('hidden');
+      }
+    }
+
+    function switchServiceTab(tab) {
+      ['loans', 'invest', 'insure', 'bills'].forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        const panel = document.getElementById(`panel-${t}`);
+        if (t === tab) {
+          btn.className = "px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold text-xs";
+          panel.classList.remove('hidden');
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 font-bold text-xs hover:text-white";
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    async function executeTransferAction() {
+      const dest = document.getElementById('transferDest').value;
+      const amt = parseFloat(document.getElementById('transferAmount').value) || 0;
+      const rail = document.getElementById('transferRail').value;
+      const alertBox = document.getElementById('transferAlert');
+
+      if (amt <= 0) {
+        alert('Please enter a valid transfer amount.');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/transfers/execute`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            source_account: "100019283746",
+            destination_account: dest,
+            beneficiary_name: dest.split('@')[0] || "Beneficiary",
+            rail: rail,
+            amount: amt,
+            currency: "INR",
+            remarks: "Instant Transfer via FinX Web"
+          })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alertBox.className = "p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-700 text-emerald-300 text-xs font-semibold block";
+          alertBox.innerHTML = `✓ Transferred ₹${amt.toLocaleString()} via ${rail} to ${dest}. Ref: ${data.transfer_reference}`;
+          // Update visual balance
+          const balEl = document.getElementById('custSavingsBal');
+          let curr = 248500.0 - amt;
+          balEl.textContent = `₹${curr.toLocaleString('en-IN', {minimumFractionDigits: 2})}`;
+        } else {
+          throw new Error(data.message || 'Transfer failed');
+        }
+      } catch (err) {
+        alertBox.className = "p-2.5 rounded-lg bg-red-950/80 border border-red-700 text-red-300 text-xs font-semibold block";
+        alertBox.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    function executeWalletAction(type) {
+      const walEl = document.getElementById('custWalletBal');
+      if (type === 'topup') {
+        walEl.textContent = '₹20,500.00';
+        alert('✓ Wallet topped up with ₹2,000 from Savings Account. Double-entry ledger entry posted.');
+      } else {
+        walEl.textContent = '₹13,500.00';
+        alert('✓ ₹5,000 withdrawn from Wallet to Savings Account.');
+      }
+    }
+
+    function toggleCardReveal() {
+      cardRevealed = !cardRevealed;
+      const numEl = document.getElementById('cardNumDisplay');
+      const cvvEl = document.getElementById('cardCvvDisplay');
+      const btn = document.getElementById('btnRevealCard');
+
+      if (cardRevealed) {
+        numEl.textContent = "6521 8934 7120 4489";
+        cvvEl.textContent = "842";
+        btn.innerHTML = '<i class="fa-solid fa-eye-slash text-indigo-400 mr-1"></i> Hide Details';
+      } else {
+        numEl.textContent = "6521 •••• •••• 4489";
+        cvvEl.textContent = "•••";
+        btn.innerHTML = '<i class="fa-solid fa-eye text-indigo-400 mr-1"></i> Reveal Details';
+      }
+    }
+
+    function toggleCardBlock() {
+      const btn = document.getElementById('btnBlockCard');
+      if (btn.textContent.includes('Freeze')) {
+        btn.innerHTML = '<i class="fa-solid fa-unlock text-emerald-400 mr-1"></i> Unfreeze';
+        alert('Card temporarily frozen for all online and ATM channels.');
+      } else {
+        btn.innerHTML = '<i class="fa-solid fa-lock text-amber-400 mr-1"></i> Freeze Card';
+        alert('Card active and unlocked.');
+      }
+    }
+
+    function showUpiQrModal() { document.getElementById('qrModal').classList.remove('hidden'); }
+    function closeUpiQrModal() { document.getElementById('qrModal').classList.add('hidden'); }
+
+    function updateEmiCalc() {
+      const p = parseFloat(document.getElementById('loanAmountSlider').value);
+      const n = parseInt(document.getElementById('loanTenureSlider').value);
+      document.getElementById('loanAmtDisplay').textContent = p.toLocaleString();
+      document.getElementById('loanTenureDisplay').textContent = n;
+
+      const r = 11.5 / 12 / 100;
+      const emi = (p * r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
+      const totRepay = emi * n;
+      const totInterest = totRepay - p;
+
+      document.getElementById('calculatedEmi').innerHTML = `₹${Math.round(emi).toLocaleString()}<span class="text-sm text-slate-400 font-normal">/mo</span>`;
+      document.getElementById('calcTotalInterest').textContent = `₹${Math.round(totInterest).toLocaleString()}`;
+      document.getElementById('calcTotalRepay').textContent = `₹${Math.round(totRepay).toLocaleString()}`;
+    }
+
+    function applyLoanAction() {
+      const p = document.getElementById('loanAmountSlider').value;
+      alert(`✓ Loan application for ₹${parseFloat(p).toLocaleString()} APPROVED by automated risk engine! ₹${parseFloat(p).toLocaleString()} disbursed to Savings Account.`);
+    }
+
+    function buyAssetAction(sym, name) {
+      alert(`✓ Investment order for ${name} (${sym}) placed and confirmed on exchange.`);
+    }
+
+    function buyPolicyAction(type, name, sum, prem) {
+      alert(`✓ Policy issued: ${name} with ₹${(sum/100000).toFixed(0)} Lakh coverage. Annual premium ₹${prem.toLocaleString()} collected.`);
+    }
+
+    function payBillMock(biller, amt) {
+      alert(`✓ Bill of ₹${amt.toLocaleString()} for ${biller} paid successfully.`);
+    }
+
+    async function createAndCaptureGatewayOrder() {
+      const amt = parseFloat(document.getElementById('gwOrderAmount').value) || 2400;
+      const method = document.getElementById('gwMethod').value;
+      const resBox = document.getElementById('gwResultBox');
+
+      try {
+        const res = await fetch(`${API_BASE}/payments/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: amt, currency: "INR" })
+        });
+        const order = await res.json();
+
+        // Auto capture
+        const capRes = await fetch(`${API_BASE}/payments/capture`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ order_id: order.order_id, amount: amt, payment_method: method })
+        });
+        const cap = await capRes.json();
+
+        resBox.classList.remove('hidden');
+        resBox.innerHTML = `✓ Payment Captured: ${cap.order_id}<br>Gross: ₹${amt.toLocaleString()} • Net Settled: ₹${(amt * 0.982).toFixed(2)} (MDR: ₹${(amt * 0.018).toFixed(2)})<br>Double-entry balanced entry posted on General Ledger.`;
+      } catch (err) {
+        alert('Order execution error: ' + err.message);
+      }
+    }
+
+    function triggerMerchantSettlementAction() {
+      alert('✓ Settle request triggered. ₹62,400 transferred to Merchant Settlement Account via IMPS clearing.');
+    }
+
+    function runSanctionsScreenMock() {
+      alert('✓ Sanctions & Watchlist check completed. 0 false positives found.');
+    }
+
+    async function fetchTrialBalance() {
+      try {
+        const res = await fetch(`${API_BASE}/ledger/trial-balance`);
+        const data = await res.json();
+        alert(`✓ General Ledger Trial Balance: Total Debits ₹${data.total_debits.toLocaleString()} == Total Credits ₹${data.total_credits.toLocaleString()} (BALANCED: ${data.is_balanced})`);
+      } catch (e) {
+        alert('Ledger fetch error: ' + e.message);
+      }
+    }
+  </script>
+</body>
+</html>

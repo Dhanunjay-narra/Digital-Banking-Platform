@@ -3,7 +3,7 @@
 from typing import List, Dict, Any
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.identity.router import get_current_user
 from services.identity.models import User
 from services.customer.models import Customer

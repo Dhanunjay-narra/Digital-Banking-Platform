@@ -4,8 +4,8 @@ import uuid
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
-from platform.common.exceptions import UnbalancedLedgerException, EntityNotFoundException, FinTechException
-from platform.common.math_utils import to_decimal
+from finx_platform.common.exceptions import UnbalancedLedgerException, EntityNotFoundException, FinTechException
+from finx_platform.common.math_utils import to_decimal
 from services.ledger.models import LedgerAccount, JournalEntry, LedgerPosting, AccountType, EntryType
 from services.ledger.schemas import JournalEntryCreate, LedgerAccountCreate, TrialBalanceResponse, TrialBalanceItem
 

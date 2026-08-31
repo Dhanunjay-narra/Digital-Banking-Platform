@@ -3,7 +3,7 @@
 from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.merchants.schemas import MerchantCreateRequest, MerchantResponse, SettlementResponse
 from services.merchants.service import merchant_service
 from services.merchants.models import MerchantProfile, MerchantSettlement

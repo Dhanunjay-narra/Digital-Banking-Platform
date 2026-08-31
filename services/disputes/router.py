@@ -5,7 +5,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.identity.router import get_current_user
 from services.identity.models import User
 from services.customer.service import customer_service

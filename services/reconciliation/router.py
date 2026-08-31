@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.reconciliation.service import reconciliation_engine
 
 router = APIRouter(prefix="/reconciliation", tags=["Multi-Rail Reconciliation Engine"])

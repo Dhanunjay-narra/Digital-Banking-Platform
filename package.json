@@ -4,7 +4,7 @@
   "description": "FinXCore Digital Banking & Financial Super Platform",
   "private": true,
   "scripts": {
-    "dev:backend": "python -m uvicorn platform.api_gateway.main:app --reload --port 8000",
+    "dev:backend": "python -m uvicorn finx_platform.api_gateway.main:app --reload --port 8000",
     "dev:frontend": "python -m http.server 3000 --directory apps/web",
     "test:backend": "pytest tests/",
     "start": "python start_platform.py"

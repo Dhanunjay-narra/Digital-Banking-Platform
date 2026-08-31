@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.accounting.service import accounting_service
 
 router = APIRouter(prefix="/accounting", tags=["Accounting & Financial Statements"])

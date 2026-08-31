@@ -2,7 +2,7 @@
 
 import random
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, AccountFrozenException, InsufficientFundsException, EntityNotFoundException
+from finx_platform.common.exceptions import FinTechException, AccountFrozenException, InsufficientFundsException, EntityNotFoundException
 from services.accounts.models import BankAccount, AccountHold
 from services.accounts.schemas import AccountCreateRequest
 from services.ledger.service import ledger_service

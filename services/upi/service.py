@@ -4,8 +4,8 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, Any, List
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException, InsufficientFundsException
-from platform.security.password import hash_password, verify_password
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException, InsufficientFundsException
+from finx_platform.security.password import hash_password, verify_password
 from services.upi.models import UPIProfile, UPICollectRequest
 from services.upi.schemas import VPARegisterRequest, UPISendRequest, UPICollectCreateRequest, QRCodeGenerateRequest, UPITransactionResponse
 from services.accounts.models import BankAccount

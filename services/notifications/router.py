@@ -3,7 +3,7 @@
 from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from platform.common.database import get_db
+from finx_platform.common.database import get_db
 from services.notifications.schemas import NotificationSendRequest, NotificationResponse
 from services.notifications.service import notification_service
 from services.notifications.models import NotificationLog

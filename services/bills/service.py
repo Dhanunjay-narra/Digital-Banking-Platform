@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import List
 from sqlalchemy.orm import Session
-from platform.common.exceptions import FinTechException, EntityNotFoundException, InsufficientFundsException
+from finx_platform.common.exceptions import FinTechException, EntityNotFoundException, InsufficientFundsException
 from services.bills.models import CustomerBill, BillerCategory
 from services.bills.schemas import BillPayRequest
 from services.accounts.models import BankAccount
