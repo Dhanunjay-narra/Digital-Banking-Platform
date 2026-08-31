@@ -1,5 +1,6 @@
 {
   "module": "financial_ledger",
   "invariant": "sum_debits_equals_sum_credits",
-  "status": "balanced"
+  "status": "balanced",
+  "trial_balance_status": "OK"
 }
