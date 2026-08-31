@@ -1,0 +1,6 @@
+{
+  "module": "fraud_and_compliance",
+  "status": "active_monitoring",
+  "sanctions_screening": "enabled",
+  "sar_reporting": "active"
+}
