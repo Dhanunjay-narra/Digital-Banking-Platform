@@ -1,0 +1,6 @@
+{
+  "module": "money_movement",
+  "rails": ["IMPS", "NEFT", "RTGS", "UPI", "CARDS"],
+  "status": "operational",
+  "active_switches": 4
+}
