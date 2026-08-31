@@ -1,0 +1,6 @@
+{
+  "module": "web_frontend",
+  "version": "1.0.0",
+  "one_click_logins": true,
+  "chartjs_visuals": true
+}
